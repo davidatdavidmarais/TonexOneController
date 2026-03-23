@@ -326,6 +326,8 @@ V1.0.0.2:
 The MiniMidi project is a small, low cost bluetooth Midi peripheral device, similar to the M-Vave Chocolate pedal.
 <br>It can run two or four footswitches, and control the Tonex pedal (or other compatible devices).
 Refer to [https://github.com/Builty/TonexOneController/blob/main/minimidi/source](https://github.com/Builty/TonexOneController/blob/main/minimidi/source)
+<br><br>
+Raspberry Pi USB control support is also included in this repo under [`raspberry_pi`](raspberry_pi/README.md), including a Python CLI and optional GPIO footswitch example.
 
 ## ©️ License <a name="license"></a>
 The Tonex One Controller is under the Apache 2.0 license. It is free for both research and commercial use cases.

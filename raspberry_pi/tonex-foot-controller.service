@@ -1,0 +1,16 @@
+[Unit]
+Description=TONEX One Raspberry Pi Footswitch Controller
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/TonexOneController/raspberry_pi
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/pi/TonexOneController/raspberry_pi/.venv/bin/python /home/pi/TonexOneController/raspberry_pi/gpio_footswitch.py --port /dev/ttyACM0
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
