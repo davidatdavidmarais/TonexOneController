@@ -76,6 +76,8 @@ Files included:
 - `tonex-foot-controller.service`
 - `install_service.sh`
 
+This service now runs the web controller (`web_controller.py`) and exposes a small web page with **Previous** and **Next** buttons.
+
 Before installing, edit the service file to match your user, repo path, and USB device:
 
 - `User=...`
@@ -87,6 +89,18 @@ Then install and enable:
 ```bash
 cd raspberry_pi
 ./install_service.sh
+```
+
+Open from your phone/laptop browser:
+
+```text
+http://<your-raspberry-pi-ip>:8080
+```
+
+Find your Pi IP with:
+
+```bash
+hostname -I
 ```
 
 Useful commands:

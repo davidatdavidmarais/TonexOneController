@@ -1,5 +1,5 @@
 [Unit]
-Description=TONEX One Raspberry Pi Footswitch Controller
+Description=TONEX One Raspberry Pi Web Controller
 After=network-online.target
 Wants=network-online.target
 
@@ -8,7 +8,7 @@ Type=simple
 User=pi
 WorkingDirectory=/home/pi/TonexOneController/raspberry_pi
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/home/pi/TonexOneController/raspberry_pi/.venv/bin/python /home/pi/TonexOneController/raspberry_pi/gpio_footswitch.py --port /dev/ttyACM0
+ExecStart=/home/pi/TonexOneController/raspberry_pi/.venv/bin/python /home/pi/TonexOneController/raspberry_pi/web_controller.py --host 0.0.0.0 --port 8080 --tonex-port /dev/ttyACM0
 Restart=on-failure
 RestartSec=2
 
