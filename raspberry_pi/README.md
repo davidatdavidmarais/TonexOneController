@@ -18,6 +18,44 @@ using the same low-level protocol/framing as the ESP32 firmware.
 - IK Multimedia TONEX One connected by USB
 - Optional footswitch buttons to GPIO pins and GND
 
+## Wi-Fi access point (hotspot) for phone-only use
+
+The web controller already listens on all interfaces (`0.0.0.0`). You can make the Pi broadcast its own Wi-Fi network so a phone joins it and opens the page without your home router.
+
+**Warning:** Turning the Pi into an access point can drop your existing Wi-Fi client connection (and SSH over Wi-Fi). Use Ethernet, a monitor/keyboard, or try this when you can recover access if something goes wrong.
+
+### Easiest path: NetworkManager hotspot (Raspberry Pi OS Bookworm)
+
+1. Ensure NetworkManager is active (not “legacy” dhcpcd-only networking). If needed: `sudo raspi-config` → Advanced Options → Network Config → **NetworkManager**, then reboot.
+
+2. Run the helper script (optional custom SSID and password, min 8 chars for WPA):
+
+```bash
+cd raspberry_pi
+chmod +x setup_wifi_ap.sh
+./setup_wifi_ap.sh
+# or: ./setup_wifi_ap.sh MyTonexPi mysecret12
+```
+
+3. On your phone, join that Wi-Fi, then open:
+
+```text
+http://10.42.0.1:8080
+```
+
+(NetworkManager’s hotspot gateway is usually `10.42.0.1`. If that fails, check the Pi with `ip -4 addr show` while the hotspot is up.)
+
+### Stop / start the hotspot
+
+```bash
+sudo nmcli connection down tonex-hotspot
+sudo nmcli connection up tonex-hotspot
+```
+
+### Alternative: hostapd (advanced)
+
+If you do not use NetworkManager, use the Raspberry Pi documentation for a full access-point setup (static IP, DHCP, routing): [Set up a routed wireless access point](https://www.raspberrypi.com/documentation/computers/configuration.html#host-access-point-setup). After that, use the Pi’s AP IP address with port `8080` (often `192.168.4.1` in those guides).
+
 ## Setup
 
 ```bash
